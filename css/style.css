@@ -45,16 +45,22 @@ body {
 }
 
 #score_div {
-    text-align: center;
-    font-size: 40px;
+    font-size: 80%;
+    margin-top: 58%;
+    margin-left: 80%;
+    color: white;
+}
+
+#restart{
+    margin-left: 33%;
 }
 
 #restart_btn {
     position: absolute;
     top: 0;
-    width: 100%;
+    width: 30%;
     padding: 20px;
-    background-color: fuchsia;
+    background-color: rgb(110, 0, 0);
     color: white;
     font-size: 35px;
     border: none;

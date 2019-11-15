@@ -80,6 +80,14 @@ $(function () {
         }
     });
 
+    //Exemplo pra tentar trocar o teclado pelo mouse
+    // $(document).mousemove(function(e) {
+    //     $('.logo').offset({
+    //         left: e.pageX,
+    //         top: e.pageY + 20
+    //     });
+    // });
+
     $(document).on('keyup', function (e) {
         var key = e.keyCode;
         if (key === 32) {
@@ -124,7 +132,5 @@ $(function () {
         if (b1 < y2 || y1 > b2 || r1 < x2 || x1 > r2) return false;
         return true;
     }
-
-
 
 });
