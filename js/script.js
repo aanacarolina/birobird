@@ -49,6 +49,7 @@ $(function () {
                 var new_height = parseInt(Math.random() * 100);
                          
                 //change the pole's height
+                //Um acrescenta o novo valor aleatorio e o outro subtrai pra manter a mesma distancia pro boneco passa
                 pole_1.css('height', pole_initial_height + new_height);
                 pole_2.css('height', pole_initial_height - new_height);
 
