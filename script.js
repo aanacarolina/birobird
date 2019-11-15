@@ -17,7 +17,7 @@ $(function () {
     var pole_initial_height = parseInt(pole.css('height'));
     var bird_left = parseInt(bird.css('left'));
     var bird_height = parseInt(bird.height());
-    var speed = 10;
+    var speed = 5;
 
     //some other declarations
     var go_up = false;
@@ -45,8 +45,9 @@ $(function () {
 
             //check whether the poles went out of the container
             if (pole_current_position > container_width) {
+                //Novos tamanhos das barras
                 var new_height = parseInt(Math.random() * 100);
-
+                         
                 //change the pole's height
                 pole_1.css('height', pole_initial_height + new_height);
                 pole_2.css('height', pole_initial_height - new_height);
@@ -57,6 +58,7 @@ $(function () {
 
                 score_updated = false;
 
+                //quando chega no limite do container volta ao começo
                 pole_current_position = pole_initial_position;
             }
 
