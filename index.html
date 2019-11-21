@@ -5,24 +5,26 @@
     <meta charset="utf-8" />
     <title>BiroBird</title>
     <link href="./css/style.css" rel="stylesheet" />
+    <script src="./js/jquery.min.js"></script>
+    <script src="./js/jcanvas.min.js"></script>
+    <script src="./js/script.js"></script>
 </head>
 
 <body>
-
     <div id="contexto">
-
         <div id="container">
-
-            <div id="bird"></div>
+            <div id="biro"></div>
     
             <img src="./img/pole.png" alt="" id="pole_1" class="pole">
             <img src="./img/pole.png" alt="" id="pole_2" class="pole">
+
+            <img src="./img/pole.png" alt="" id="pole_3" class="pole2">
+            <img src="./img/pole.png" alt="" id="pole_4" class="pole2">
             
             <div id="score_div">
-                <p><b>Score: </b><span id="score">0</span></p>
-                <p><b>Speed: </b><span id="speed">5</span></p>
+                <p><b>Pontuação: </b><span id="score">0</span></p>
+                <p><b>Velocidade: </b><span id="speed">5</span></p>
             </div>
-            
         </div>   
         
         <div id="restart">
@@ -30,11 +32,6 @@
         </div>
 
     </div>
-
-    <script src="./js/jquery.min.js"></script>
-    <script src="./js/jcanvas.min.js"></script>
-    <script src="./js/script.js"></script>
-
 </body>
 
 </html>
