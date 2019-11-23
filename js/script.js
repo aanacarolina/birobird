@@ -2,27 +2,34 @@ $(function () {
 
     //salva os objetos do DOM como variáveis
     let container = $('#container');
+
     let biro = $('#biro');
+    
     let pole = $('.pole');
-    let pole2 = $('.pole2');
     let pole_1 = $('#pole_1');
     let pole_2 = $('#pole_2');
+    
+    let pole2 = $('.pole2');
     let pole_3 = $('#pole_3');
     let pole_4 = $('#pole_4');
+    
     let score = $('#score');
-    let speed_span = $('#speed');
+    let velocidade_span = $('#velocidade');
     let restart_btn = $('#restart_btn');
 
     //define a configuração inicial do jogo
     let container_width = parseInt(container.width());
     let container_height = parseInt(container.height());
+
     let pole_initial_position = parseInt(pole.css('right'));
     let pole_initial_height = parseInt(pole.css('height'));
     let pole_initial_position2 = parseInt(pole2.css('right'));
     let pole_initial_height2 = parseInt(pole2.css('height'));
+    
     let biro_left = parseInt(biro.css('left'));
     let biro_height = parseInt(biro.height());
-    let speed = 5;
+    
+    let velocidade = 5;
     let go_up = false;
     let score_updated = false;
     let game_over = false;
@@ -30,8 +37,7 @@ $(function () {
 
     let the_game = setInterval(function () {
 
-        if (collision(biro, pole_1) || collision(biro, pole_2) || collision(biro, pole_3) || collision(biro, pole_4) || 
-            parseInt(biro.css('top')) <= 0 || parseInt(biro.css('top')) > container_height - biro_height) {
+        if (verificaColisoes()) {
 
             stop_the_game();
 
@@ -41,59 +47,25 @@ $(function () {
             let pole_current_position2 = parseInt(pole2.css('right'));
 
             //update the score when the poles have passed the bird successfully
-            if (pole_current_position > container_width - biro_left || pole_current_position2 > container_width - biro_left) {
-                if (score_updated === false) {
-                    score.text(parseInt(score.text()) + 1);
-                    score_updated = true;
-                }
-            }
+            verificaUltrapassagem(pole_current_position)
+            verificaUltrapassagem(pole_current_position2)        
 
             //check whether the poles went out of the container
-            if (pole_current_position > container_width) {
-                //Novos tamanhos das barras
-                let new_height = parseInt(Math.random() * 100);
-                // do{
-                //     let new_height2 = parseInt(Math.random() * 200);
-                // } while (new_height <= (new_height2 + 100))
-                         
-                //change the pole's height
-                //Um acrescenta o novo valor aleatorio e o outro subtrai pra manter a mesma distancia pro boneco passa
-                pole_1.css('height', pole_initial_height + new_height);
-                pole_2.css('height', pole_initial_height - new_height);
-                
-                //increase speed
-                speed = speed + 1;
-                speed_span.text(speed);
-
-                score_updated = false;
-
-                //quando chega no limite do container volta ao começo
-                pole_current_position = pole_initial_position;
-                
+            if (verificaPoleForaDoContainer(pole_current_position)) {
+                atribuiTamanhoPole(pole_1, pole_2, pole_initial_height);
+                calculaVelocidade();
+                pole_current_position = pole_initial_position; //quando chega no limite do container volta ao começo           
             }
 
-             if (pole_current_position2 > container_width) {
-                let new_height2 = parseInt(Math.random() * 100);
-                         
-                //change the pole's height
-                //Um acrescenta o novo valor aleatorio e o outro subtrai pra manter a mesma distancia pro boneco passa
-                pole_3.css('height', pole_initial_height2 + new_height2);
-                pole_4.css('height', pole_initial_height2 - new_height2);
-
-                //increase speed
-                speed = speed + 1;
-                speed_span.text(speed);
-
-                score_updated = false;
-
-                //quando chega no limite do container volta ao começo
-                pole_current_position2 = pole_initial_position2;
+            if (verificaPoleForaDoContainer(pole_current_position)) {
+                atribuiTamanhoPole(pole_3, pole_4, pole_initial_height2);
+                calculaVelocidade();
+                pole_current_position2 = pole_initial_position2; //quando chega no limite do container volta ao começo
             }
 
-            //move the poles
-            pole.css('right', pole_current_position + speed);
-            pole2.css('right', pole_current_position2 + speed);
-
+            movimentaPoles(pole, pole_current_position);
+            movimentaPoles(pole2, pole_current_position2);
+            
             if (go_up === false) {
                 go_down();
             }
@@ -101,20 +73,49 @@ $(function () {
 
     }, 40);
 
+    function verificaColisoes(){ //Verifica todas as colisoes 
+        if (collision(biro, pole_1) || collision(biro, pole_2) || collision(biro, pole_3) || collision(biro, pole_4) || 
+            parseInt(biro.css('top')) <= 0 || parseInt(biro.css('top')) > container_height - biro_height)
+            return true;
+    }
+
+    function verificaUltrapassagem($pole_current_position){
+        if ($pole_current_position > container_width - biro_left){
+            if (score_updated === false) {
+                score.text(parseInt(score.text()) + 1);
+                score_updated = true;
+            }
+        }
+            return true;
+    }
+
+    function atribuiTamanhoPole($pole_1, $pole_2, $pole_initial_height){
+        let new_height = parseInt(Math.random() * 100);
+        $pole_1.css('height', $pole_initial_height + new_height);
+        $pole_2.css('height', $pole_initial_height - new_height);
+    }
+
+    function calculaVelocidade(){
+        velocidade = velocidade + 1;
+        velocidade_span.text(velocidade);
+        score_updated = false;
+    }
+
+    function verificaPoleForaDoContainer($pole_current_position){
+        if ($pole_current_position > container_width)
+            return true;
+    }
+
+    function movimentaPoles($pole, $pole_current_position){
+        $pole.css('right', $pole_current_position + velocidade);
+    }
+    
     $(document).on('keydown', function (e) {
         let key = e.keyCode;
         if (key === 32 && go_up === false && game_over === false) {
             go_up = setInterval(up, 50);
         }
-    });
-
-    //Exemplo pra tentar trocar o teclado pelo mouse
-    // $(document).mousemove(function(e) {
-    //     $('.logo').offset({
-    //         left: e.pageX,
-    //         top: e.pageY + 20
-    //     });
-    // });
+    })
 
     $(document).on('keyup', function (e) {
         let key = e.keyCode;
@@ -123,7 +124,6 @@ $(function () {
             go_up = false;
         }
     });
-
 
     function go_down() {
         biro.css('top', parseInt(biro.css('top')) + 5);
