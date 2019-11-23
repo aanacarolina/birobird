@@ -85,11 +85,12 @@ body {
     top: 0;
     width: 30%;
     padding: 20px;
-    background-color: rgb(110, 0, 0);
+    background-color: rgba(0, 0, 0, 0.623);
     color: white;
     font-size: 35px;
     border: none;
     cursor: pointer;
     display: none;
-    margin-top: 6%;
+    margin-top: 20%;
+    margin-left: 33%;
 }

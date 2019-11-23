@@ -161,4 +161,24 @@ $(function () {
         return true;
     }
 
+    var $restart_btn = $('#restart_btn');
+    $restart_btn.drawText({
+        text: 'Game Over',
+        fontFamily: 'cursive',
+        fontSize: 40,
+        x: 290,
+        y: 30,
+        fillStyle: 'red',
+        strokeWidth: 1
+      });
+
+      $restart_btn.drawText({
+        text: 'Clique aqui para recomeçar',
+        fontFamily: 'cursive',
+        fontSize: 20,
+        x: 290,
+        y: 70,
+        fillStyle: 'white',
+      });
+
 });
