@@ -1,6 +1,6 @@
 $(function () {
 
-    //salva os objetos do DOM como letiáveis
+    //salva os objetos do DOM como variáveis
     let container = $('#container');
     let biro = $('#biro');
     let pole = $('.pole');
@@ -13,7 +13,7 @@ $(function () {
     let speed_span = $('#speed');
     let restart_btn = $('#restart_btn');
 
-    //saving some initial setup
+    //define a configuração inicial do jogo
     let container_width = parseInt(container.width());
     let container_height = parseInt(container.height());
     let pole_initial_position = parseInt(pole.css('right'));
@@ -23,8 +23,6 @@ $(function () {
     let biro_left = parseInt(biro.css('left'));
     let biro_height = parseInt(biro.height());
     let speed = 5;
-
-    //some other declarations
     let go_up = false;
     let score_updated = false;
     let game_over = false;
