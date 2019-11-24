@@ -15,7 +15,7 @@ $(function () {
     
     let score = $('#score');
     let velocidade_span = $('#velocidade');
-    let restart_btn = $('#restart_btn');
+    let restart = $('#restart');
 
     //define a configuração inicial do jogo
     let container_width = parseInt(container.width());
@@ -29,11 +29,16 @@ $(function () {
     let biro_left = parseInt(biro.css('left'));
     let biro_height = parseInt(biro.height());
     
-    let velocidade = 5;
+    let velocidade = parseInt(prompt("Qual a velocidade que você deseja começar o jogo?"));;
+    while(velocidade <=0 || isNaN(velocidade)){
+        velocidade = parseInt(prompt("Não podemos começar com uma velocidade tão baixa assim. Vamos tentar de novo mas agora informando um número maior que zero."));
+    }
     let go_up = false;
     let score_updated = false;
     let game_over = false;
 
+    alert("Se prepare que o jogo vai começar!");
+    document.getElementById("velocidade").innerHTML = velocidade;
 
     let the_game = setInterval(function () {
 
@@ -47,8 +52,8 @@ $(function () {
             let pole_current_position2 = parseInt(pole2.css('right'));
 
             //update the score when the poles have passed the bird successfully
-            verificaUltrapassagem(pole_current_position)
-            verificaUltrapassagem(pole_current_position2)        
+            verificaUltrapassagem(pole_current_position);
+            verificaUltrapassagem(pole_current_position2);      
 
             //check whether the poles went out of the container
             if (verificaPoleForaDoContainer(pole_current_position)) {
@@ -136,10 +141,10 @@ $(function () {
     function stop_the_game() {
         clearInterval(the_game);
         game_over = true;
-        restart_btn.slideDown();
+        restart.slideDown();
     }
 
-    restart_btn.click(function () {
+    restart.click(function () {
         location.reload();
     });
 
@@ -161,8 +166,8 @@ $(function () {
         return true;
     }
 
-    var $restart_btn = $('#restart_btn');
-    $restart_btn.drawText({
+    var $restart = $('#restart');
+    $restart.drawText({
         text: 'Game Over',
         fontFamily: 'cursive',
         fontSize: 40,
@@ -170,15 +175,32 @@ $(function () {
         y: 30,
         fillStyle: 'red',
         strokeWidth: 1
-      });
+    });
 
-      $restart_btn.drawText({
+    $restart.drawText({
         text: 'Clique aqui para recomeçar',
         fontFamily: 'cursive',
         fontSize: 20,
         x: 290,
         y: 70,
         fillStyle: 'white',
+    });
+
+    $restart.drawPolygon({
+        fillStyle: 'red',
+        x: 100, y: 40,
+        radius: 40,
+        sides: 5,
+        concavity: 0.5
       });
+
+      $restart.drawPolygon({
+        fillStyle: 'red',
+        x: 470, y: 40,
+        radius: 40,
+        sides: 5,
+        concavity: 0.5
+      });
+
 
 });

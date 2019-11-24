@@ -76,11 +76,7 @@ body {
     position: fixed;
 }
 
-#restart{
-    margin-left: 33%;
-}
-
-#restart_btn {
+#restart {
     position: absolute;
     top: 0;
     width: 30%;
