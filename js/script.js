@@ -201,6 +201,4 @@ $(function () {
         sides: 5,
         concavity: 0.5
       });
-
-
 });
