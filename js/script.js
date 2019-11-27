@@ -2,17 +2,13 @@ $(function () {
 
     //salva os objetos do DOM como variáveis
     let container = $('#container');
-
     let biro = $('#biro');
-    
     let pole = $('.pole');
     let pole_1 = $('#pole_1');
     let pole_2 = $('#pole_2');
-    
     let pole2 = $('.pole2');
     let pole_3 = $('#pole_3');
     let pole_4 = $('#pole_4');
-    
     let score = $('#score');
     let velocidade_span = $('#velocidade');
     let restart = $('#restart');
@@ -20,24 +16,24 @@ $(function () {
     //define a configuração inicial do jogo
     let container_width = parseInt(container.width());
     let container_height = parseInt(container.height());
-
     let pole_initial_position = parseInt(pole.css('right'));
     let pole_initial_height = parseInt(pole.css('height'));
     let pole_initial_position2 = parseInt(pole2.css('right'));
     let pole_initial_height2 = parseInt(pole2.css('height'));
-    
     let biro_left = parseInt(biro.css('left'));
     let biro_height = parseInt(biro.height());
-    
-    let velocidade = parseInt(prompt("Qual a velocidade que você deseja começar o jogo?"));;
+
+
+    //define a velocidade inicial do jogo  
+    let velocidade = parseInt(prompt("INFORME A VELOCIDADE INICIAL: "));;
     while(velocidade <=0 || isNaN(velocidade)){
-        velocidade = parseInt(prompt("Não podemos começar com uma velocidade tão baixa assim. Vamos tentar de novo mas agora informando um número maior que zero."));
+        velocidade = parseInt(prompt("Não podemos começar com uma velocidade tão baixa... Por favor, informe um número maior que zero."));
     }
     let go_up = false;
     let score_updated = false;
     let game_over = false;
 
-    alert("Se prepare que o jogo vai começar!");
+    alert("PREPARE-SE, O JOGO VAI COMEÇAR!");
     document.getElementById("velocidade").innerHTML = velocidade;
 
     let the_game = setInterval(function () {
@@ -51,11 +47,11 @@ $(function () {
             let pole_current_position = parseInt(pole.css('right'));
             let pole_current_position2 = parseInt(pole2.css('right'));
 
-            //update the score when the poles have passed the bird successfully
+            //atualiza a pontuação quando biro passa por uma barreira com sucesso
             verificaUltrapassagem(pole_current_position);
             verificaUltrapassagem(pole_current_position2);      
 
-            //check whether the poles went out of the container
+            //verifica se as poles estão dentro dos limites do container
             if (verificaPoleForaDoContainer(pole_current_position)) {
                 atribuiTamanhoPole(pole_1, pole_2, pole_initial_height);
                 calculaVelocidade();
@@ -145,7 +141,7 @@ $(function () {
     }
 
     restart.click(function () {
-        location.reload();
+        location.assign('home.html');
     });
 
     function collision($div1, $div2) {
@@ -168,8 +164,8 @@ $(function () {
 
     var $restart = $('#restart');
     $restart.drawText({
-        text: 'Game Over',
-        fontFamily: 'cursive',
+        text: 'GAME OVER',
+        fontFamily: 'sans-serif',
         fontSize: 40,
         x: 290,
         y: 30,
@@ -177,18 +173,9 @@ $(function () {
         strokeWidth: 1
     });
 
-    $restart.drawText({
-        text: 'Clique aqui para recomeçar',
-        fontFamily: 'cursive',
-        fontSize: 20,
-        x: 290,
-        y: 70,
-        fillStyle: 'white',
-    });
-
     $restart.drawPolygon({
         fillStyle: 'red',
-        x: 100, y: 40,
+        x: 80, y: 40,
         radius: 40,
         sides: 5,
         concavity: 0.5
@@ -196,9 +183,21 @@ $(function () {
 
       $restart.drawPolygon({
         fillStyle: 'red',
-        x: 470, y: 40,
+        x: 500, y: 40,
         radius: 40,
         sides: 5,
         concavity: 0.5
       });
+
+      $restart.drawText({
+        text: 'CLIQUE PARA VOLTAR AO INÍCIO',
+        fontFamily: 'sans-serif',
+        fontSize: 20,
+        x: 290,
+        y: 70,
+        fillStyle: 'white',
+    });
 });
+
+//algumas funções utilizadas na lógica do jogo foram 
+//inspiradas nesse projeto: https://github.com/arshadasgar/flattybird

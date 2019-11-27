@@ -1,3 +1,17 @@
+function jogar(){
+  	location.assign("index.html");
+}
+
+function exibirRegras(){
+  	alert("BEM VINDO AO BIROBIRD! VOU TE EXPLICAR COMO O JOGO FUNCIONA:");
+  	alert("1 - CLICANDO NO BOTÃO JOGAR, VOCÊ DEVE INFORMAR A VELOCIDADE PARA INICIAR O JOGO (ELA DEVE SER DIFERENTE DE 0).");
+  	alert("2 - PARA JOGAR, VOCÊ DEVE PRESSIONAR (E/OU MANTER PRESSIONADA) A BARRA DE ESPAÇO, DE FORMA A MANTER O BIROLIRO NO AR E FAZÊ-LO DESVIAR DOS OBSTÁCULOS COMUNISTAS DOUTRINADORES.");
+  	alert("3 - A VELOCIDADE VAI AUMENTANDO CONFORME VOCÊ VAI PASSANDO DAS BARREIRAS SEM COLIDIR.");
+  	alert("4 - CASO OCORRA UMA COLISÃO, VOCÊ PERDEU O JOGO :( MAS TUDO BEM, PODE TENTAR NOVAMENTE!");
+  	alert("5 - DIVIRTA-SE! :)");
+}
+
+
 $(function () {
 
  let $nome = $('#nome');
@@ -7,7 +21,7 @@ $(function () {
 
 	$(nome).drawText({
   		fillStyle: '#000',
-  		strokeStyle: '#ff0',
+  		strokeStyle: '#ff0000',
   		strokeWidth: 12,
   		x: 400, y: 160,
   		fontSize: 120,
